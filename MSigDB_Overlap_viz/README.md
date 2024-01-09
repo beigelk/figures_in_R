@@ -5,7 +5,7 @@ This is an outline of how the MSigDB Overlap Analysis can be run and how to make
 These methods were written on 1/9/24.
 
 1. Make lists of genes up, down, or up and down.
-2. Go to [GSEA Investigate Mouse Gene Sets](https://www.gsea-msigdb.org/gsea/msigdb/mouse/annotate.jsp).
+2. Go to [MSigDB Investigate Mouse Gene Sets](https://www.gsea-msigdb.org/gsea/msigdb/mouse/annotate.jsp).
     
     link: [https://www.gsea-msigdb.org/gsea/msigdb/mouse/annotate.jsp](https://www.gsea-msigdb.org/gsea/msigdb/mouse/annotate.jsp)
     
