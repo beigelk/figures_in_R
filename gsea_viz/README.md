@@ -1,6 +1,6 @@
-# GSEA Dot Plots
+# MSigDB Overlap Analysis Dot Plots
 
-This is an outline of how the GSEA analysis was run and how to make a dot plot of the results.
+This is an outline of how the MSigDB Overlap Analysis was run and how to make a dot plot of the results.
 
 These methods were written on 1/9/24.
 
@@ -40,7 +40,7 @@ These methods were written on 1/9/24.
     
     ggplot(gsea_genes_all, aes(x = `k/K`, y = `Gene Set Name`, color = -log10(`FDR q-value`), size = `# Genes in Overlap (k)`)) +
       geom_point(stat = 'identity') + 
-      xlab("Gene ratio (# Genes in Overlap / # Genes in Gene Set") + ylab("Pathway") + ggtitle("GSEA") + 
+      xlab("Gene ratio (# Genes in Overlap / # Genes in Gene Set") + ylab("Pathway") + ggtitle("MSigDB Overlap Analysis") + 
       theme_bw() +
       scale_color_gradient(low = "blue", high = "red")
     ```
