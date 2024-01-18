@@ -5,4 +5,4 @@ Each subfolder contains a minimal example of how to generate figures. There shou
 
 
 ## Pathway analysis visualizations
-[MSigDB GSEA Analysis (web browser) **Dot Plots**](https://github.com/beigelk/figures_in_R/tree/bdaec30989d562807a6c1d0dfc1188af8a56d953/gsea_viz/)
+[MSigDB Overlap Analysis (web browser) **Dot Plots**](https://github.com/beigelk/figures_in_R/tree/bdaec30989d562807a6c1d0dfc1188af8a56d953/gsea_viz/)
