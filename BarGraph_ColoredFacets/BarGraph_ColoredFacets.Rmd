@@ -1,0 +1,73 @@
+---
+title: "Bar Graph with colored strips to label facets"
+author: "Kat Beigel"
+date: "2/21/24"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(RColorBrewer)
+library(viridis)
+library(grid)
+library(gtable)
+library(ggh4x)
+library(scales)
+library(ggpubr)
+
+```
+
+
+```{r Function}
+
+BarGraphColoredFacets = function(df, x_id, y_val, category){
+
+  colors = scales::viridis_pal(option = "turbo", direction = -1)(length(levels(df[,category])))
+
+  plot = ggplot(data = df %>% select(x_id, y_val, category),
+                    aes(x = factor(x_id),
+                        y = y_val,
+                        fill = factor(category, level = unique(df[,category])))) + 
+    geom_bar(stat = "identity", position = 'dodge', width = 0.5) +
+    # geom_text(aes(label = name), size = 2, angle = 90, hjust = 1) +
+    guides(fill = guide_legend(title = paste0(category)) +
+    ggtitle(paste0(yval, " by ", category) +
+    ylab(paste0(y_val))) +
+    xlab(paste0(category))) +
+    theme(axis.text.x = element_text(angle = 90, vjust = -4, hjust = 1, size = 5)) + 
+    facet_grid(~factor(category, level = unique(df[,category])), space = 'free_x', scales = 'free_x', switch = 'x') +
+    theme_classic() +
+    theme(
+      axis.title.x = element_text(margin = margin(t = 10)),
+      axis.text.x = element_blank(),
+      axis.ticks.x = element_blank(),
+      panel.spacing = unit(0.1, "lines"),
+      panel.border = element_rect(fill = NA, colour = "gray", linewidth = 0.4),
+      strip.text.x = element_text(angle = 0, size = 10, hjust = 0.5, margin = margin(0.2,0,0.5,0, "cm")),
+      strip.background = element_rect(color = "gray", linewidth = 0.000001), 
+      strip.placement = "outside"
+    ) +
+    scale_fill_manual(values = colors) +
+    geom_bar(stat = "identity", position = 'dodge', width = 0.8) +
+    scale_y_continuous(expand = c(0,0)) + 
+    scale_x_discrete(
+      expand = expansion(add = c(1.2,1.2))) + # DO NOT REMOVE, adds "padding" in facets
+    guides(fill = "none")
+
+  
+  q <- ggplotGrob(plot)
+  
+  for (i in 1:length(colors)){
+    k = grep("strip-b", q$layout$name)[i]
+    lg <- linesGrob(x=unit(c(0,1),"npc"), y=unit(c(0,0),"npc"), 
+                    gp=gpar(col=colors[i], lwd=20))
+    q$grobs[[k]]$grobs[[1]]$children[[1]] <- lg
+  }
+
+  grid.draw(q)
+
+}
+```
+
