@@ -22,52 +22,69 @@ library(ggpubr)
 
 ```{r Function}
 
-BarGraphColoredFacets = function(df, x_id, y_val, category){
+######################################################
+# Arguments for BarGraphColoredFacets(data_tbl, col_x_id, col_y_val, col_category)
+  # data_tbl = dataframe
+  # col_x_id = the name of the x-axis variable (discrete) in data_tbl
+  # col_y_val = the name of the y-axis variable (continuous) in data_tbl
+  # col_category = the name of the category variable (discrete) in data_tbl
 
-  colors = scales::viridis_pal(option = "turbo", direction = -1)(length(levels(df[,category])))
+BarGraphColoredFacets = function(data_tbl, col_x_id, col_y_val, col_category){
 
-  plot = ggplot(data = df %>% select(x_id, y_val, category),
-                    aes(x = factor(x_id),
-                        y = y_val,
-                        fill = factor(category, level = unique(df[,category])))) + 
+  x_id = enquo(col_x_id)
+  y_val = enquo(col_y_val)
+  category = enquo(col_category)
+  cat = as_label(category)
+  
+  colors = scales::viridis_pal(option = "viridis", direction = -1)(length(unique(data_tbl[,cat])))
+  
+  plot = ggplot(data = data_tbl,
+                aes(x = !!x_id,
+                    y = !!y_val,
+                    fill = !!category)) +
     geom_bar(stat = "identity", position = 'dodge', width = 0.5) +
-    # geom_text(aes(label = name), size = 2, angle = 90, hjust = 1) +
-    guides(fill = guide_legend(title = paste0(category)) +
-    ggtitle(paste0(yval, " by ", category) +
-    ylab(paste0(y_val))) +
-    xlab(paste0(category))) +
-    theme(axis.text.x = element_text(angle = 90, vjust = -4, hjust = 1, size = 5)) + 
-    facet_grid(~factor(category, level = unique(df[,category])), space = 'free_x', scales = 'free_x', switch = 'x') +
     theme_classic() +
-    theme(
+      theme(
       axis.title.x = element_text(margin = margin(t = 10)),
       axis.text.x = element_blank(),
       axis.ticks.x = element_blank(),
       panel.spacing = unit(0.1, "lines"),
       panel.border = element_rect(fill = NA, colour = "gray", linewidth = 0.4),
       strip.text.x = element_text(angle = 0, size = 10, hjust = 0.5, margin = margin(0.2,0,0.5,0, "cm")),
-      strip.background = element_rect(color = "gray", linewidth = 0.000001), 
+      strip.background = element_rect(color = "gray", linewidth = 0.000001),
       strip.placement = "outside"
     ) +
     scale_fill_manual(values = colors) +
-    geom_bar(stat = "identity", position = 'dodge', width = 0.8) +
-    scale_y_continuous(expand = c(0,0)) + 
+    facet_grid(formula(paste(category, collapse = " ")),
+               space = 'free_x', scales = 'free_x', switch = 'x') +
+    scale_y_continuous(expand = c(0,0)) +
     scale_x_discrete(
       expand = expansion(add = c(1.2,1.2))) + # DO NOT REMOVE, adds "padding" in facets
     guides(fill = "none")
-
   
-  q <- ggplotGrob(plot)
-  
-  for (i in 1:length(colors)){
-    k = grep("strip-b", q$layout$name)[i]
-    lg <- linesGrob(x=unit(c(0,1),"npc"), y=unit(c(0,0),"npc"), 
-                    gp=gpar(col=colors[i], lwd=20))
-    q$grobs[[k]]$grobs[[1]]$children[[1]] <- lg
-  }
-
-  grid.draw(q)
-
+    q <- ggplotGrob(plot)
+    
+    for (i in 1:length(colors)){
+      k = grep("strip-b", q$layout$name)[i]
+      lg <- linesGrob(x=unit(c(0,1),"npc"), y=unit(c(0,0),"npc"),
+                      gp=gpar(col=colors[i], lwd=20))
+      q$grobs[[k]]$grobs[[1]]$children[[1]] <- lg
+    }
+    
+    grid.draw(q)
+    
 }
+
+```
+
+
+```{r Run function}
+
+# Run on the `iris` data set, modified to have an `id` column
+iris_w_id = iris %>% mutate(id = rownames(.))
+
+# Run function
+BarGraphColoredFacets(iris, id, Sepal.Length, Species)
+
 ```
 
