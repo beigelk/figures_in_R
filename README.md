@@ -6,3 +6,8 @@ Each subfolder contains a minimal example of how to generate figures. There shou
 
 ## Pathway analysis visualizations
 [MSigDB Overlap Analysis (web browser) **Dot Plots**](https://github.com/beigelk/figures_in_R/tree/main/MSigDB_Overlap_viz)
+
+___
+
+## Bar graphs
+[Bar graph with colored facets (categories)](https://github.com/beigelk/figures_in_R/tree/main/BarGraph_ColoredFacets)
