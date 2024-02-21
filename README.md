@@ -7,13 +7,13 @@ Each subfolder contains a minimal example of how to generate figures. The exampl
 ## Pathway analysis visualizations
 - MSigDB Overlap Analysis (web browser) **Dot Plots**: [MSigDB_Overlap_viz](https://github.com/beigelk/figures_in_R/tree/main/MSigDB_Overlap_viz)
 
-<img src="https://github.com/beigelk/figures_in_R/blob/d8ac48a46efd2a521bfedd1fe623e0ce07970a23/MSigDB_Overlap_viz/readme_imgs/Screenshot_2024-01-09_at_10.43.40_AM.png" width="500">
+  <img src="https://github.com/beigelk/figures_in_R/blob/d8ac48a46efd2a521bfedd1fe623e0ce07970a23/MSigDB_Overlap_viz/readme_imgs/Screenshot_2024-01-09_at_10.43.40_AM.png" width="500">
 
 ___
 
 ## Bar graphs
 - Bar graph with colored facets (categories): [BarGraph_ColoredFacets](https://github.com/beigelk/figures_in_R/tree/main/BarGraph_ColoredFacets)
 
-<img src="https://github.com/beigelk/figures_in_R/blob/d8ac48a46efd2a521bfedd1fe623e0ce07970a23/BarGraph_ColoredFacets/BarGraph_ColoredFacets_files/figure-gfm/Run%20function%20on%20iris-1.png" width="700">
+  <img src="https://github.com/beigelk/figures_in_R/blob/d8ac48a46efd2a521bfedd1fe623e0ce07970a23/BarGraph_ColoredFacets/BarGraph_ColoredFacets_files/figure-gfm/Run%20function%20on%20iris-1.png" width="700">
 
-<img src="https://github.com/beigelk/figures_in_R/blob/d8ac48a46efd2a521bfedd1fe623e0ce07970a23/BarGraph_ColoredFacets/BarGraph_ColoredFacets_files/figure-gfm/Run%20function%20on%20mtcars-1.png" width="700">
+  <img src="https://github.com/beigelk/figures_in_R/blob/d8ac48a46efd2a521bfedd1fe623e0ce07970a23/BarGraph_ColoredFacets/BarGraph_ColoredFacets_files/figure-gfm/Run%20function%20on%20mtcars-1.png" width="700">
